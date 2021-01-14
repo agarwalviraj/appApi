@@ -14,6 +14,10 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+app.get("/", (req, res) => {
+  res.send("<h1>App hosted at:" + `<a href=./users> /users </a>`);
+});
+
 app.use("/users", users);
 
 app.listen(process.env.PORT || 3000, () => {

@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:uuid", (req, res) => {
-  geny.findOne({ name: req.params.uuid }, (err, foundUser) => {
+  geny.findOne({ uuid: req.params.uuid }, (err, foundUser) => {
     if (err) console.error(err);
     else res.send(foundUser);
   });

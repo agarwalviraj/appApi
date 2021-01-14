@@ -49,4 +49,11 @@ app.patch("/:uuid/:points", (req, res) => {
   );
 });
 
+app.delete("/:uuid", (req, res) => {
+  geny.deleteOne({ uuid: req.params.uuid }, function (err) {
+    if (err) console.error(err);
+    else console.log("Successfully deleted");
+  });
+});
+
 module.exports = app;

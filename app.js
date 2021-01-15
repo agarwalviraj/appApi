@@ -3,15 +3,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const products = require("./routes/products");
-const bodyParser = require("body-parser");
 require("dotenv").config();
 
 app.use(cors());
 app.use("*", cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+
+// mongoose.connect(
+//   `mongodb+srv://admin:${process.env.DB_PWD}@geny.mbixr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority/`,
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// );
 mongoose.connect(
-  `mongodb+srv://admin:${process.env.DB_PWD}@geny.mbixr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority/`,
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  `mongodb+srv://genyDB:${process.env.DB_PWD}@cluster0.vlyq7.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("db connected");
+  }
 );
 
 app.get("/", (req, res) => {

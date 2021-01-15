@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const schema = require("../model/productSchema");
-const addProduct = require("../model/addProduct");
 const geny = schema;
+const { v4: uuidv4 } = require("uuid");
+const bodyParser = require("body-parser");
+app.use(express.json());
 
 app.get("/all", (req, res) => {
   geny.find((err, foundUsers) => {
@@ -21,16 +23,23 @@ app.get("/name/:uuid", (req, res) => {
   });
 });
 
-app.post("/add", (req, res) => {
-  const newProduct = new geny(addProduct(req));
-
-  newProduct.save((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send("Successfully added");
-    }
+app.post("/add", async (req, res) => {
+  const data = new geny({
+    uuid: uuidv4(),
+    name: req.body.name,
+    quantity: req.body.quantity,
   });
+  // res.json(data);
+  try {
+    const doc = await data.save();
+    res.status(201).json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    res.json(err);
+  }
+  // res.send("hello");
 });
 
 app.patch("/update", (req, res) => {

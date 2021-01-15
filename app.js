@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-const users = require("./routes/user");
+const products = require("./routes/products");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
@@ -15,10 +15,10 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  res.send("<h1>App hosted at: <a href=./users> /users </a>");
+  res.send("<h1>App hosted at: <a href=./products> /products </a>");
 });
 
-app.use("/products", users);
+app.use("/products", products);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started on sucessfully");

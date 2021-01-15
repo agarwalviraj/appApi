@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-function addUser(req) {
+function addProduct(req) {
   return {
     uuid: uuidv4(),
     name: req.body.name,
@@ -7,4 +7,4 @@ function addUser(req) {
   };
 }
 
-module.exports = addUser;
+module.exports = addProduct;

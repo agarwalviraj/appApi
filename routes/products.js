@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const schema = require("../model/userSchema");
-const addUser = require("../model/addUser");
+const schema = require("../model/productSchema");
+const addProduct = require("../model/addProduct");
 const geny = schema;
 
 app.get("/all", (req, res) => {
@@ -22,9 +22,9 @@ app.get("/name/:uuid", (req, res) => {
 });
 
 app.post("/add", (req, res) => {
-  const newUser = new geny(addUser(req));
+  const newProduct = new geny(addProduct(req));
 
-  newUser.save((err) => {
+  newProduct.save((err) => {
     if (err) {
       console.log(err);
     } else {

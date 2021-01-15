@@ -59,7 +59,7 @@ app.patch("/update", (req, res) => {
 app.delete("/delete", (req, res) => {
   geny.deleteOne({ uuid: req.body.uuid }, function (err) {
     if (err) console.error(err);
-    else console.log("Successfully deleted");
+    else res.send("Successfully deleted");
   });
 });
 

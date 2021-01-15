@@ -3,7 +3,7 @@ function addUser(req) {
   return {
     uuid: uuidv4(),
     name: req.body.name,
-    points: req.body.points,
+    quantity: req.body.quantity,
   };
 }
 

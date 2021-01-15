@@ -4,26 +4,24 @@ const schema = require("../model/userSchema");
 const addUser = require("../model/addUser");
 const geny = schema;
 
-app.get("/", (req, res) => {
-  geny
-    .find((err, foundUsers) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(foundUsers);
-      }
-    })
-    .limit(parseInt(req.query.amt));
+app.get("/all", (req, res) => {
+  geny.find((err, foundUsers) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(foundUsers);
+    }
+  });
 });
 
-app.get("/:uuid", (req, res) => {
+app.get("/name/:uuid", (req, res) => {
   geny.findOne({ uuid: req.params.uuid }, (err, foundUser) => {
     if (err) console.error(err);
     else res.send(foundUser);
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/add", (req, res) => {
   const newUser = new geny(addUser(req));
 
   newUser.save((err) => {
@@ -35,10 +33,10 @@ app.post("/", (req, res) => {
   });
 });
 
-app.patch("/:uuid/:points", (req, res) => {
+app.patch("/update", (req, res) => {
   geny.updateOne(
-    { uuid: req.params.uuid },
-    { points: req.params.points },
+    { uuid: req.body.uuid },
+    { quantity: req.body.quantity },
     (err) => {
       if (err) {
         console.error(err);
@@ -49,8 +47,8 @@ app.patch("/:uuid/:points", (req, res) => {
   );
 });
 
-app.delete("/:uuid", (req, res) => {
-  geny.deleteOne({ uuid: req.params.uuid }, function (err) {
+app.delete("/delete", (req, res) => {
+  geny.deleteOne({ uuid: req.body.uuid }, function (err) {
     if (err) console.error(err);
     else console.log("Successfully deleted");
   });

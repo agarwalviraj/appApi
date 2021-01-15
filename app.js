@@ -15,7 +15,7 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  res.send("<h1>App hosted at:" + `<a href=./users> /users </a>`);
+  res.send("<h1>App hosted at: <a href=./users> /users </a>");
 });
 
 app.use("/users", users);

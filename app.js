@@ -25,7 +25,7 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  res.send("<h1>App hosted at: <a href=./products> /products </a>");
+  res.send("all good, server is up");
 });
 
 app.use("/products", products);

@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("<h1>App hosted at: <a href=./users> /users </a>");
 });
 
-app.use("/users", users);
+app.use("/products", users);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started on sucessfully");

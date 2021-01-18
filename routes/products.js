@@ -6,8 +6,8 @@ const { v4: uuidv4 } = require("uuid");
 const bodyParser = require("body-parser");
 app.use(express.json());
 
-app.get("/all", (req, res) => {
-  geny.find((err, foundUsers) => {
+app.get("/all/:group", (req, res) => {
+  geny.find({ group: parseInt(req.params.group) }, (err, foundUsers) => {
     if (err) {
       console.log(err);
     } else {
@@ -28,8 +28,8 @@ app.post("/add", async (req, res) => {
     uuid: uuidv4(),
     name: req.body.name,
     quantity: req.body.quantity,
+    group: req.body.group,
   });
-  // res.json(data);
   try {
     const doc = await data.save();
     res.status(201).json({
@@ -39,7 +39,6 @@ app.post("/add", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-  // res.send("hello");
 });
 
 app.patch("/update", (req, res) => {
